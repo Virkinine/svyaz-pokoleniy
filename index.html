@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Связь поколений — Мы помним</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo"><span class="logo-accent">Мы</span>Помним</div>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-item active">Главная</a>
+            <a href="heroes.html" class="nav-item">Герои и подвиги</a>
+            <a href="chronicle.html" class="nav-item">Живая хроника</a>
+            <a href="contacts.html" class="nav-item">Присоединиться</a>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Связь поколений</h1>
+            <p class="hero-subtitle">История Великой Победы в лицах, судьбах и семейных архивах</p>
+            <a href="chronicle.html" class="cta-button">Открыть хронику</a>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- Блок миссии и счетчик остаются на всю ширину, как у вас на скриншоте -->
+        <section class="mission-block">
+            <h2>Память сквозь года</h2>
+            <p>Этот проект создан с нуля для сохранения исторической правды и укрепления связи между поколениями. Мы собираем, оцифровываем и бережно храним воспоминания о тех, кто отстоял мирное небо. Наша цель — сделать так, чтобы имена героев звучали в вечности, а их подвиг оставался ориентиром для молодежи.</p>
+        </section>
+
+        <section class="counter-box">
+            <h3>Вместе мы сохранили</h3>
+            <div id="memory-counter">0</div>
+            <p>историй и подвигов наших героев</p>
+        </section>
+
+        <!-- НОВЫЙ ДВУХКОЛОНОЧНЫЙ МАКЕТ ДЛЯ ПК -->
+        <div class="main-content-layout">
+            
+            <!-- ЛЕВАЯ КОЛОНКА: Основной контент (Письмо + Карточки) -->
+            <div class="primary-content">
+                
+                <section class="front-letter">
+                    <div class="letter-triangle">
+                        <h3>Письмо с фронта</h3>
+                        <p class="letter-date">9 мая 1945 года</p>
+                        <blockquote class="letter-text">
+                            «Здравствуйте, мои дорогие! Вот и наступил тот день, ради которого мы прошли тысячи вёрст через огонь и дым. Победа! Война окончена. Скоро я обниму вас. Помните тех, кто остался на полях сражений, берегите мир, который мы завоевали...»
+                        </blockquote>
+                    </div>
+                </section>
+
+                <section class="features-grid">
+                    <div class="feature-card">
+                        <img src="news1_big.jpg" alt="Бессмертный подвиг" class="card-img">
+                        <div class="card-body">
+                            <h3>Бессмертный подвиг</h3>
+                            <p>Документальные очерки, фронтовые письма и подлинные биографии защитников Родины.</p>
+                            <a href="heroes.html" class="card-link">Изучить →</a>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <img src="victory.jpg" alt="Семейные архивы" class="card-img">
+                        <div class="card-body">
+                            <h3>Семейные архивы</h3>
+                            <p>Личные воспоминания потомков, уникальные фотографии и свидетельства очевидцев.</p>
+                            <a href="chronicle.html" class="card-link">Смотреть архивы →</a>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- ПРАВАЯ КОЛОНКА: Боковая панель с полезными виджетами -->
+            <aside class="sidebar-content">
+                
+                <!-- Виджет 1: Этот день в истории -->
+                <div class="sidebar-widget memory-calendar">
+                    <div class="widget-header">
+                        <span class="widget-icon">📅</span>
+                        <h4>Этот день в истории</h4>
+                    </div>
+                    <div class="widget-body">
+                        <div class="history-date">25 октября 1943 года</div>
+                        <p>В ходе Битвы за Днепр советские войска решительным штурмом освободили крупные промышленные центры Днепропетровск и Днепродзержинск, ликвидировав важный узел обороны врага.</p>
+                    </div>
+                </div>
+
+                <!-- Виджет 2: Слова героев (Цитата) -->
+                <div class="sidebar-widget quote-box">
+                    <div class="widget-header">
+                        <span class="widget-icon">📜</span>
+                        <h4>Слова героев</h4>
+                    </div>
+                    <div class="widget-body">
+                        <blockquote class="patriotic-quote">
+                            «Никто не забыт, ничто не забыто. Подвиг народа живет в наших сердцах до тех пор, пока мы бережно храним эту память.»
+                        </blockquote>
+                    </div>
+                </div>
+
+                <!-- Виджет 3: Дополнительный интерактив проекта -->
+                <div class="sidebar-widget stats-mini">
+                    <div class="widget-header">
+                        <span class="widget-icon">📊</span>
+                        <h4>Архив проекта</h4>
+                    </div>
+                    <div class="widget-body">
+                        <ul class="stats-list">
+                            <li><strong>Оцифровано писем:</strong> 150+</li>
+                            <li><strong>Фотографий в галерее:</strong> 320+</li>
+                            <li><strong>Заявок в обработке:</strong> 18</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </aside>
+
+        </div> <!-- Конец двухколоночного макета -->
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            
+            <!-- Колонка 1: О проекте -->
+            <div class="footer-column about-project">
+                <h4><span class="logo-accent">Мы</span>Помним</h4>
+                <p class="footer-description">
+                    Патриотический медиапроект «Связь поколений», созданный с нуля для сохранения исторической правды, оцифровки фронтовых архивов и укрепления преемственности поколений.
+                </p>
+            </div>
+    
+            <!-- Колонка 2: Навигация и документы -->
+            <div class="footer-column footer-nav">
+                <h4>Информация</h4>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="heroes.html">Герои и подвиги</a></li>
+                    <li><a href="chronicle.html">Живая хроника</a></li>
+                    <li><a href="privacy.html">Политика конфиденциальности</a></li>
+                </ul>
+            </div>
+    
+            <!-- Колонка 3: Контакты и Школа -->
+            <div class="footer-column footer-contacts">
+                <h4>Контакты учреждения</h4>
+                <p class="school-name">ГУО «Средняя школа №16 г. Полоцка»</p>
+                <p class="footer-address">📍 РБ, Витебская область, г. Полоцк, ул. Зыгина, 59</p>
+                <p class="footer-email">✉️ <a href="mailto:guo_sh16@polotskroo.by">guo_sh16@polotskroo.by</a></p>
+            </div>
+    
+            <!-- Колонка 4: Социальные сети -->
+            <div class="footer-column footer-social">
+                <h4>Мы в сети</h4>
+                <p>Следите за новостями и событиями нашей школы в официальных источниках:</p>
+                <div class="social-links">
+                    <!-- Рабочие ссылки на ресурсы ГУО «Средняя школа №16 г. Полоцка» -->
+                    <a href="https://www.instagram.com/school_shestnadtsataya/" class="social-item instagram" target="_blank" title="Instagram школы">📸 Instagram</a>
+                    <a href="https://sch16.polotskroo.by/" class="social-item website" target="_blank" title="Сайт школы">🌐 Сайт школы</a>
+                </div>
+            </div>
+    
+        </div>
+    
+        <!-- Нижняя плашка с копирайтом -->
+        <div class="footer-bottom">
+            <p>© 2026 Патриотический медиапроект «Связь поколений». Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

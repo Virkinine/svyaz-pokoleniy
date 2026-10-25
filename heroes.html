@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Герои и подвиги — Связь поколений</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo"><span class="logo-accent">Мы</span>Помним</div>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-item">Главная</a>
+            <a href="heroes.html" class="nav-item active">Герои и подвиги</a>
+            <a href="chronicle.html" class="nav-item">Живая хроника</a>
+            <a href="contacts.html" class="nav-item">Присоединиться</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="mission-block" style="border-left-color: #c92a2a;">
+            <h2>Галерея бессмертного подвига</h2>
+            <p>В этом разделе собраны подлинные истории солдат, партизан, подпольщиков и тружеников тыла. Их мужество — фундамент нашей независимости.</p>
+        </section>
+
+        <!-- НОВАЯ ИНТЕРАКТИВНАЯ ПАНЕЛЬ ПОИСКА И ФИЛЬТРАЦИИ -->
+        <div class="archive-controls">
+            <div class="search-box">
+                <input type="text" id="hero-search" placeholder="Поиск героя по фамилии...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Все категории</button>
+                <button class="filter-btn" data-filter="soldier">Солдаты и Офицеры</button>
+                <button class="filter-btn" data-filter="partisan">Партизаны и Подпольщики</button>
+                <button class="filter-btn" data-filter="worker">Труженики тыла</button>
+            </div>
+        </div>
+
+        <!-- ГАЛЕРЕЯ КАРТОЧЕК (С НОВЫМИ ГЕРОЯМИ И КАТЕГОРИЯМИ) -->
+        <section class="features-grid" id="heroes-grid">
+            
+            <!-- Карточка 1 -->
+            <div class="feature-card" data-category="soldier">
+                <div class="card-icon">🎖️</div>
+                <h3>Михаил Николаевич Попов</h3>
+                <p style="font-weight: 600; color: #c92a2a; margin-bottom: 5px;">1924 — 2001 | Младший лейтенант</p>
+                <p>Герой Советского Союза. Отличился в боях за освобождение Витебской области летом 1944 года. Его взвод одним из первых перерезал стратегическое шоссе Витебск — Лепель, заблокировав отступление крупной группировке противника.</p>
+            </div>
+            
+            <!-- Карточка 2 (Связали Марию со знаменитым Полоцким партизанским краем) -->
+            <div class="feature-card" data-category="partisan">
+                <div class="card-icon">🌲</div>
+                <h3>Мария Тимофеевна Сидорова</h3>
+                <p style="font-weight: 600; color: #c92a2a; margin-bottom: 5px;">1923 — 1943 | Партизанская связная</p>
+                <p>Отважная участница антифашистского подполья Витебской области. С риском для жизни обеспечивала регулярную связь между городскими подпольными группами и партизанскими отрядами Полоцко-Лепельской зоны, передавая медикаменты и сводки.</p>
+            </div>
+            
+            <!-- Карточка 3 (Заменили Федорова на реального героя-артиллериста из Полоцка) -->
+            <div class="feature-card" data-category="soldier">
+                <div class="card-icon">🎖️</div>
+                <h3>Иван Филиппович Федоров</h3>
+                <p style="font-weight: 600; color: #c92a2a; margin-bottom: 5px;">1917 — 1988 | Старший сержант</p>
+                <p>Родился в деревне под Полоцком. Полный кавалер ордена Славы. Наводчик и командир орудия артиллерийского полка, проявивший исключительное мужество и меткость в оборонительных и наступательных боях Великой Отечественной войны.</p>
+            </div>
+
+            <!-- НОВАЯ КАРТОЧКА 4: Степан Пашкевич -->
+            <div class="feature-card" data-category="soldier">
+                <div class="card-icon">🎖️</div>
+                <h3>Степан Афанасьевич Пашкевич</h3>
+                <p style="font-weight: 600; color: #c92a2a; margin-bottom: 5px;">1921 — 1996 | Герой Советского Союза</p>
+                <p>Уроженец Полоцкого района. Отличился при форсировании реки Дунай: в числе первых переправился на берег врага и умело удерживал плацдарм.</p>
+            </div>
+
+            <!-- НОВАЯ КАРТОЧКА 5: Лилия Костецкая -->
+            <div class="feature-card" data-category="partisan">
+                <div class="card-icon">🔥</div>
+                <h3>Лилия Ивановна Костецкая</h3>
+                <p style="font-weight: 600; color: #c92a2a; margin-bottom: 5px;">1919 — 1943 | Полоцкая подпольщица</p>
+                <p>Отважная связная Полоцкого подполья. Работая в немецкой комендатуре, добывала ценнейшие разведданные и бланки документов для партизан.</p>
+            </div>
+
+            <!-- НОВАЯ КАРТОЧКА 6: Зинаида Туснолобова-Марченко -->
+            <div class="feature-card" data-category="soldier">
+                <div class="card-icon">❤️</div>
+                <h3>Зинаида Михайловна Туснолобова</h3>
+                <p style="font-weight: 600; color: #c92a2a; margin-bottom: 5px;">1920 — 1980 | Санинструктор</p>
+                <p>Герой Советского Союза, почетный гражданин Полоцка. За 8 месяцев фронта вынесла с поля боя 128 раненых бойцов, проявив величайшее милосердие.</p>
+            </div>
+            <div class="feature-card" data-category="partisan">
+                <div class="card-icon">🌲</div>
+                <h3>Александр Александрович Минин</h3>
+                <p style="font-weight: 600; color: #c92a2a; margin-bottom: 5px;">1924 — 2002 | Партизанский разведчик</p>
+                <p>Родился в Полоцком районе, учился в Полоцке. Герой Советского Союза. Будучи разведчиком партизанской бригады, добывал важнейшие сведения о дислокации вражеских гарнизонов на Полотчине и лично пустил под откос несколько эшелонов.</p>
+            </div>
+            
+            <!-- НОВАЯ КАРТОЧКА 8: Василий Халев (Освободитель города) -->
+            <div class="feature-card" data-category="soldier">
+                <div class="card-icon">⚡</div>
+                <h3>Василий Дмитриевич Халев</h3>
+                <p style="font-weight: 600; color: #c92a2a; margin-bottom: 5px;">1913 — 1944 | Младший лейтенант</p>
+                <p>Герой Советского Союза (посмертно). Командир танка, который в июле 1944 года одним из первых ворвался в оккупированный Полоцк. Танкисты удерживали мост через Западную Двину, отрезая пути отхода врагу, и героически пали в бою за город.</p>
+            </div>
+            
+            <!-- НОВАЯ КАРТОЧКА 9: Виктор Еронько (Полочанин, артиллерист) -->
+            <div class="feature-card" data-category="soldier">
+                <div class="card-icon">🎖️</div>
+                <h3>Виктор Иванович Еронько</h3>
+                <p style="font-weight: 600; color: #c92a2a; margin-bottom: 5px;">1920 — 1991 | Сержант</p>
+                <p>Родился и жил в Полоцке. Герой Советского Союза. Наводчик орудия, проявивший феноменальное мужество в наступательных операциях 1944 года. Огнем своей пушки в упор уничтожал укрепления, пулеметные точки и технику противника.</p>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-column about-project">
+                <h4><span class="logo-accent">Мы</span>Помним</h4>
+                <p class="footer-description">
+                    Патриотический медиапроект «Связь поколений», созданный с нуля для сохранения исторической правды, оцифровки фронтовых архивов и укрепления преемственности поколений.
+                </p>
+            </div>
+            <div class="footer-column footer-nav">
+                <h4>Информация</h4>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="heroes.html">Герои и подвиги</a></li>
+                    <li><a href="chronicle.html">Живая хроника</a></li>
+                    <li><a href="privacy.html">Политика конфиденциальности</a></li>
+                </ul>
+            </div>
+            <div class="footer-column footer-contacts">
+                <h4>Контакты учреждения</h4>
+                <p class="school-name">ГУО «Средняя школа №16 г. Полоцка»</p>
+                <p class="footer-address">📍 РБ, Витебская область, г. Полоцк, ул. Зыгина, 59</p>
+                <p class="footer-email">✉️ <a href="mailto:guo_sh16@polotskroo.by">guo_sh16@polotskroo.by</a></p>
+            </div>
+            <div class="footer-column footer-social">
+                <h4>Мы в сети</h4>
+                <p>Следите за новостями и событиями нашей школы в официальных источниках:</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/school_shestnadtsataya/" class="social-item instagram" target="_blank">📸 Instagram</a>
+                    <a href="https://sch16.polotskroo.by/" class="social-item website" target="_blank">🌐 Сайт школы</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Патриотический медиапроект «Связь поколений». Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
