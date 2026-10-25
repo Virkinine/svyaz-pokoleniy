@@ -91,7 +91,7 @@ body {
     color: #ffffff;
 }
 
-/* Локальный баннер */
+
 .hero-section {
     background: radial-gradient(circle, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.85) 100%), 
                 url('hero-bg.jpg') no-repeat center center/cover;
@@ -143,7 +143,7 @@ body {
     box-shadow: 0 6px 20px rgba(201, 42, 42, 0.6);
 }
 
-/* Миссия */
+
 .mission-block {
     background-color: #ffffff;
     padding: 45px;
@@ -160,7 +160,7 @@ body {
     font-weight: 800;
 }
 
-/* Счётчик */
+
 .counter-box {
     text-align: center;
     margin-bottom: 40px;
@@ -184,7 +184,7 @@ body {
     margin: 10px 0;
 }
 
-/* Фронтовое письмо */
+
 .letter-triangle {
     background-color: #fcf6e5;
     border: 1px solid #e1d3b0;
@@ -217,7 +217,7 @@ body {
     border-left: 3px double #e1d3b0;
 }
 
-/* Карточки */
+
 .features-grid {
     display: flex;
     gap: 30px;
@@ -272,7 +272,7 @@ body {
     padding: 20px 0;
 }
 
-/* Центральная вертикальная линия */
+
 .timeline-line {
     position: absolute;
     left: 50%;
@@ -284,7 +284,7 @@ body {
     z-index: 1;
 }
 
-/* Элемент строки времени */
+
 .timeline-item {
     position: relative;
     width: 50%; /* Занимает ровно половину ширины экрана */
@@ -292,19 +292,19 @@ body {
     z-index: 2;
 }
 
-/* Карточки, которые стоят СЛЕВА */
+
 .left-item {
     left: 0;
     padding-right: 40px;
 }
 
-/* Карточки, которые стоят СПРАВА */
+
 .right-item {
     left: 50%;
     padding-left: 40px;
 }
 
-/* Стиль внутренней карточки с историей */
+
 .timeline-content {
     background-color: #ffffff;
     padding: 30px;
@@ -314,13 +314,13 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Эффект парения при наведении курсора на ПК */
+
 .timeline-content:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 30px rgba(201, 42, 42, 0.08);
 }
 
-/* Стили заголовков и дат */
+
 .timeline-date {
     display: inline-block;
     font-weight: 800;
@@ -342,7 +342,7 @@ body {
     line-height: 1.6;
 }
 
-/* Круглые светящиеся маркеры на линии */
+
 .timeline-dot {
     position: absolute;
     top: 30px;
@@ -354,7 +354,7 @@ body {
     z-index: 3;
 }
 
-/* Позиционирование точек для левых и правых блоков */
+
 .left-item .timeline-dot {
     right: -10px;
 }
@@ -363,9 +363,7 @@ body {
     left: -10px;
 }
 
-/* ==========================================================================
-   АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ ЭКРАНОВ (Перестроение в один ряд)
-   ========================================================================== */
+
 @media (max-width: 768px) {
     .timeline-line {
         left: 20px;
@@ -381,7 +379,7 @@ body {
     }
 }
 
-/* Анкета */
+
 .form-container {
     background-color: #ffffff;
     padding: 50px;
@@ -416,28 +414,28 @@ body {
 }
 
 .main-footer {
-    background-color: #111111; /* Глубокий темный фон */
+    background-color: #111111;
     color: #adb5bd;
     padding: 60px 0 20px 0;
     margin-top: 80px;
-    border-top: 4px solid #c92a2a; /* Наша фирменная красная линия */
+    border-top: 4px solid #c92a2a; 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 .main-content-layout {
     display: grid;
-    grid-template-columns: 2.3fr 1fr; /* Левая колонка шире сайдбара */
+    grid-template-columns: 2.3fr 1fr; 
     gap: 35px;
     margin-top: 30px;
     align-items: start;
 }
 
-/* Корректируем отступы ваших старых секций, чтобы они не ломали сетку */
+
 .main-content-layout .front-letter,
 .main-content-layout .features-grid {
     margin-bottom: 30px;
 }
 
-/* Стилизация правой панели */
+
 .sidebar-content {
     display: flex;
     flex-direction: column;
@@ -449,7 +447,7 @@ body {
     border-radius: 12px;
     padding: 25px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
-    border-top: 4px solid #c92a2a; /* Красная линия сверху виджета */
+    border-top: 4px solid #c92a2a; 
 }
 
 .widget-header {
@@ -514,7 +512,7 @@ body {
     border-bottom: none;
 }
 
-/* Адаптивный дизайн: на мобильных и планшетах все выстроится обратно в одну колонку */
+
 @media (max-width: 992px) {
     .main-content-layout {
         grid-template-columns: 1fr;
@@ -529,7 +527,7 @@ body {
     gap: 40px;
 }
 
-/* Заголовки колонок */
+
 .footer-column h4 {
     color: #ffffff;
     font-size: 18px;
@@ -539,7 +537,7 @@ body {
     letter-spacing: 1px;
 }
 
-/* Тексты в колонках */
+
 .footer-description, .footer-column p {
     font-size: 14px;
     line-height: 1.6;
@@ -552,7 +550,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* Меню информации (ссылки) */
+
 .footer-nav ul {
     list-style: none;
     padding: 0;
@@ -586,7 +584,7 @@ body {
     text-decoration: underline;
 }
 
-/* Кнопки соцсетей школы */
+
 .social-links {
     display: flex;
     flex-direction: column;
@@ -614,18 +612,18 @@ body {
     transform: translateY(-2px);
 }
 
-/* Нижняя строчка с копирайтом (вернули ваше центрирование) */
+
 .footer-bottom {
     max-width: 1200px;
     margin: 40px auto 0 auto;
     padding: 20px 20px 0 20px;
     border-top: 1px solid #2d3748;
-    text-align: center; /* Центрирование текста, как в старом футере */
+    text-align: center; 
     font-size: 13px;
     color: #718096;
 }
 
-/* Адаптивность для планшетов и телефонов */
+
 @media (max-width: 992px) {
     .footer-container {
         grid-template-columns: 1fr 1fr;
@@ -649,7 +647,7 @@ body {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
 }
 
-/* Строка поиска */
+
 #hero-search {
     width: 100%;
     padding: 14px 20px;
@@ -667,14 +665,14 @@ body {
     box-shadow: 0 4px 12px rgba(201, 42, 42, 0.05);
 }
 
-/* Группа кнопок */
+
 .filter-buttons {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
 }
 
-/* Стили кнопок-фильтров */
+
 .filter-btn {
     background-color: #f1f3f5;
     color: #495057;
@@ -698,12 +696,12 @@ body {
     box-shadow: 0 4px 10px rgba(201, 42, 42, 0.2);
 }
 
-/* Плавное исчезновение неотфильтрованных карточек */
+
 .feature-card.hide {
     display: none !important;
 }
 
-/* Настройка сетки для аккуратного размещения 3-х карточек в ряд на ПК */
+
 #heroes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
