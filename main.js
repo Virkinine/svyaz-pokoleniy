@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. Анимация бегущего счетчика на главной
+   
     const counterElement = document.getElementById("memory-counter");
     if (counterElement) {
         const targetValue = 142;
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, stepTime);
     }
 
-    // 2. Валидация и отправка формы
+  
     const memoryForm = document.querySelector(".form-container form");
     if (memoryForm) {
         memoryForm.addEventListener("submit", (event) => {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. Эффект плавного проявления карточек при открытии
+   
     const cards = document.querySelectorAll('.feature-card');
     cards.forEach((card, index) => {
         card.style.opacity = "0";
@@ -76,10 +76,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Обработчик ввода текста в поисковую строку
+   
     searchInput.addEventListener("input", filterArchive);
 
-    // Обработчик клика по кнопкам категорий
+   
     filterButtons.forEach(button => {
         button.addEventListener("click", () => {
             filterButtons.forEach(btn => btn.classList.remove("active"));
