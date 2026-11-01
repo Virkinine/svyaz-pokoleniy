@@ -707,3 +707,25 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 30px;
 }
+.status-message {
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid transparent;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+.status-success {
+    color: #2b8a3e;
+    background-color: #ebfbee;
+    border-left-color: #2b8a3e;
+}
+
+.status-error {
+    color: #c92a2a;
+    background-color: #fff5f5;
+    border-left-color: #c92a2a;
+}
