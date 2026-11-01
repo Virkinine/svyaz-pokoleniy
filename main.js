@@ -1,26 +1,52 @@
+const SUPABASE_URL = 'https://supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_W4t0BG_nPd4DLM3SSnHViQ_b2h2Kw3m';
+
+const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
 document.addEventListener("DOMContentLoaded", () => {
     
-   
     const counterElement = document.getElementById("memory-counter");
-    if (counterElement) {
-        const targetValue = 142;
-        let currentValue = 0;
-        const duration = 2000;
-        const stepTime = Math.max(Math.floor(duration / targetValue), 10);
-        
-        const counterInterval = setInterval(() => {
-            currentValue += 1;
-            counterElement.textContent = currentValue;
-            if (currentValue >= targetValue) {
-                clearInterval(counterInterval);
-            }
-        }, stepTime);
+    
+    if (counterElement && supabase) {
+        supabase
+            .from('stories')
+            .select('*', { count: 'exact', head: true })
+            .eq('is_published', true)
+            .then(({ count, error }) => {
+                if (error) {
+                    console.error(error);
+                    counterElement.textContent = "0";
+                    return;
+                }
+
+                const targetValue = count || 0;
+                let currentValue = 0;
+                
+                if (targetValue === 0) {
+                    counterElement.textContent = "0";
+                    return;
+                }
+
+                const duration = 2000;
+                const stepTime = Math.max(Math.floor(duration / targetValue), 10);
+                
+                const counterInterval = setInterval(() => {
+                    currentValue += 1;
+                    counterElement.textContent = currentValue;
+                    if (currentValue >= targetValue) {
+                        clearInterval(counterInterval);
+                    }
+                }, stepTime);
+            });
+    } else if (counterElement) {
+        counterElement.textContent = "0";
     }
 
-  
     const memoryForm = document.querySelector(".form-container form");
+    const statusText = document.getElementById('formStatus');
+
     if (memoryForm) {
-        memoryForm.addEventListener("submit", (event) => {
+        memoryForm.addEventListener("submit", async (event) => {
             event.preventDefault();
             
             const userName = document.getElementById("user-name").value.trim();
@@ -32,12 +58,49 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            alert(`Уважаемый(ая) ${userName}!\n\nСпасибо за ваш вклад. История ветерана (${heroName}) успешно отправлена в архив.`);
-            memoryForm.reset();
+            if (!supabase) {
+                if (statusText) {
+                    statusText.className = 'status-message status-error';
+                    statusText.innerText = "Ошибка подключения к базе данных. Проверьте скрипты в HTML.";
+                }
+                return;
+            }
+
+            if (statusText) {
+                statusText.className = 'status-message';
+                statusText.style.color = '#2b2b2b';
+                statusText.innerText = 'Отправка истории в архив...';
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('stories')
+                    .insert([
+                        { 
+                            user_name: userName, 
+                            hero_name: heroName, 
+                            hero_story: heroStory 
+                        }
+                    ]);
+
+                if (error) throw error;
+
+                if (statusText) {
+                    statusText.className = 'status-message status-success';
+                    statusText.innerText = `Уважаемый(ая) ${userName}! Спасибо за ваш вклад. История ветерана (${heroName}) успешно отправлена в архив и будет опубликована после проверки.`;
+                }
+                memoryForm.reset();
+
+            } catch (error) {
+                console.error(error);
+                if (statusText) {
+                    statusText.className = 'status-message status-error';
+                    statusText.innerText = "Произошла техническая ошибка при отправке. Пожалуйста, попробуйте позже.";
+                }
+            }
         });
     }
 
-   
     const cards = document.querySelectorAll('.feature-card');
     cards.forEach((card, index) => {
         card.style.opacity = "0";
@@ -50,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, index * 150);
     });
 });
+
 document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("hero-search");
     const filterButtons = document.querySelectorAll(".filter-btn");
@@ -76,10 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-   
     searchInput.addEventListener("input", filterArchive);
 
-   
     filterButtons.forEach(button => {
         button.addEventListener("click", () => {
             filterButtons.forEach(btn => btn.classList.remove("active"));
