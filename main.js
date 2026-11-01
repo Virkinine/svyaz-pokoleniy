@@ -3,7 +3,6 @@ const SUPABASE_ANON_KEY = 'sb_publishable_W4t0BG_nPd4DLM3SSnHViQ_b2h2Kw3m';
 
 const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
-
 async function sendData(event) {
     if (event) event.preventDefault();
 
@@ -43,7 +42,6 @@ async function sendData(event) {
             statusText.innerText = `Уважаемый(ая) ${userName}! Спасибо за ваш вклад. История ветерана (${heroName}) успешно отправлена в архив и будет опубликована после проверки.`;
         }
         
-
         document.getElementById("user-name").value = "";
         document.getElementById("hero-name").value = "";
         document.getElementById("hero-story").value = "";
@@ -57,7 +55,6 @@ async function sendData(event) {
     }
     return false;
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
     const counterElement = document.getElementById("memory-counter");
