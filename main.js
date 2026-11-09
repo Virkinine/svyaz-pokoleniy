@@ -1,4 +1,4 @@
-const SUPABASE_URL = 'https://supabase.co';
+const SUPABASE_URL = 'https://svyaz-pokoleniy.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_W4t0BG_nPd4DLM3SSnHViQ_b2h2Kw3m';
 
 const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
@@ -31,9 +31,15 @@ async function sendData(event) {
     }
 
     try {
+        // 2. ИСПРАВЛЕНО: Добавлено is_published: true, чтобы счетчик видел новые записи
         const { data, error } = await supabase
             .from('stories')
-            .insert([{ user_name: userName, hero_name: heroName, hero_story: heroStory }]);
+            .insert([{ 
+                user_name: userName, 
+                hero_name: heroName, 
+                hero_story: heroStory,
+                is_published: true 
+            }]);
 
         if (error) throw error;
 
@@ -50,7 +56,7 @@ async function sendData(event) {
         console.error(error);
         if (statusText) {
             statusText.className = 'status-message status-error';
-            statusText.innerText = "Произошла техническая ошибка при отправке. Пожалуйста, попробуйте позже.";
+            statusText.innerText = "Произошла техническая ошибка при отправке: " + error.message;
         }
     }
     return false;
@@ -58,28 +64,47 @@ async function sendData(event) {
 
 document.addEventListener("DOMContentLoaded", () => {
     const counterElement = document.getElementById("memory-counter");
+    
     if (counterElement && supabase) {
-        supabase
-            .from('stories')
-            .select('*', { count: 'exact', head: true })
-            .eq('is_published', true)
-            .then(({ count, error }) => {
-                if (error) { counterElement.textContent = "0"; return; }
-                const targetValue = count || 0;
-                let currentValue = 0;
-                if (targetValue === 0) { counterElement.textContent = "0"; return; }
-                const duration = 2000;
-                const stepTime = Math.max(Math.floor(duration / targetValue), 10);
-                const counterInterval = setInterval(() => {
-                    currentValue += 1;
-                    counterElement.textContent = currentValue;
-                    if (currentValue >= targetValue) clearInterval(counterInterval);
-                }, stepTime);
-            });
+        // Функция для обновления счетчика
+        const updateCounter = () => {
+            supabase
+                .from('stories')
+                .select('*', { count: 'exact', head: true })
+                .eq('is_published', true)
+                .then(({ count, error }) => {
+                    if (error) { counterElement.textContent = "0"; return; }
+                    const targetValue = count || 0;
+                    let currentValue = 0;
+                    if (targetValue === 0) { counterElement.textContent = "0"; return; }
+                    
+                    // Анимация
+                    const duration = 2000;
+                    const stepTime = Math.max(Math.floor(duration / targetValue), 10);
+                    const counterInterval = setInterval(() => {
+                        currentValue += 1;
+                        counterElement.textContent = currentValue;
+                        if (currentValue >= targetValue) clearInterval(counterInterval);
+                    }, stepTime);
+                });
+        };
+
+        // Запускаем счетчик при загрузке
+        updateCounter();
+
+        // 3. ДОБАВЛЕНО: Realtime - счетчик будет обновляться сам, если кто-то отправит анкету
+        supabase.channel('stories-channel')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'stories' }, (payload) => {
+                console.log('Новая история добавлена!');
+                updateCounter();
+            })
+            .subscribe();
+
     } else if (counterElement) {
         counterElement.textContent = "0";
     }
 
+    // --- Ваши анимации карточек остаются без изменений ---
     const cards = document.querySelectorAll('.feature-card');
     cards.forEach((card, index) => {
         card.style.opacity = "0";
@@ -92,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// --- Ваш поиск и фильтры остаются без изменений ---
 document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("hero-search");
     const filterButtons = document.querySelectorAll(".filter-btn");
