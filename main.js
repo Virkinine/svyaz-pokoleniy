@@ -1,8 +1,7 @@
 const SUPABASE_URL = 'https://svyaz-pokoleniy.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_W4t0BG_nPd4DLM3SSnHViQ_b2h2Kw3m';
 
-const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-
+const db = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 async function sendData(event) {
     if (event) event.preventDefault();
 
