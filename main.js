@@ -3,11 +3,17 @@ const SUPABASE_ANON_KEY = 'sb_publishable_W4t0BG_nPd4DLM3SSnHViQ_b2h2Kw3m';
 
 const db = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
+// Функция отправки данных формы
 async function sendData(event) {
     if (event) event.preventDefault();
 
     const statusText = document.getElementById('formStatus');
-    const userName = document.getElementById("user-name").value.trim();
+    
+    // Проверяем, существует ли форма на странице (только для contacts.html)
+    const userNameInput = document.getElementById("user-name");
+    if (!userNameInput) return; // Если формы нет, выходим
+
+    const userName = userNameInput.value.trim();
     const heroName = document.getElementById("hero-name").value.trim();
     const heroStory = document.getElementById("hero-story").value.trim();
 
@@ -16,7 +22,6 @@ async function sendData(event) {
         return false;
     }
 
-    // ИСПОЛЬЗУЕМ db ВМЕСТО supabase
     if (!db) {
         if (statusText) {
             statusText.className = 'status-message status-error';
@@ -32,23 +37,23 @@ async function sendData(event) {
     }
 
     try {
-        // ИСПОЛЬЗУЕМ db ВМЕСТО supabase
         const { data, error } = await db
             .from('stories')
             .insert([{ 
                 user_name: userName, 
                 hero_name: heroName, 
                 hero_story: heroStory,
-                is_published: true 
+                is_published: true // Обязательно для счетчика!
             }]);
 
         if (error) throw error;
 
         if (statusText) {
             statusText.className = 'status-message status-success';
-            statusText.innerText = `Уважаемый(ая) ${userName}! Спасибо за ваш вклад. История ветерана (${heroName}) успешно отправлена в архив и будет опубликована после проверки.`;
+            statusText.innerText = `Уважаемый(ая) ${userName}! Спасибо за ваш вклад. История ветерана (${heroName}) успешно отправлена в архив.`;
         }
         
+        // Очищаем поля
         document.getElementById("user-name").value = "";
         document.getElementById("hero-name").value = "";
         document.getElementById("hero-story").value = "";
@@ -57,27 +62,26 @@ async function sendData(event) {
         console.error(error);
         if (statusText) {
             statusText.className = 'status-message status-error';
-            statusText.innerText = "Произошла техническая ошибка при отправке: " + error.message;
+            statusText.innerText = "Произошла техническая ошибка: " + error.message;
         }
     }
     return false;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // --- 1. Привязка формы ---
-    // Находим форму по id (убедитесь, что в HTML у формы есть id="myForm")
+    
+    // 1. Привязка формы к функции sendData
     const form = document.getElementById('myForm');
     if (form) {
         form.addEventListener('submit', sendData);
     }
 
-    // --- 2. Счетчик ---
+    // 2. Счетчик на главной странице
     const counterElement = document.getElementById("memory-counter");
     
-    // ИСПОЛЬЗУЕМ db ВМЕСТО supabase
     if (counterElement && db) {
         const updateCounter = () => {
-            db // ИСПОЛЬЗУЕМ db ВМЕСТО supabase
+            db
                 .from('stories')
                 .select('*', { count: 'exact', head: true })
                 .eq('is_published', true)
@@ -89,8 +93,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                     const targetValue = count || 0;
                     let currentValue = 0;
+                    
                     if (targetValue === 0) { counterElement.textContent = "0"; return; }
                     
+                    // Красивая анимация увеличения цифры
                     const duration = 2000;
                     const stepTime = Math.max(Math.floor(duration / targetValue), 10);
                     const counterInterval = setInterval(() => {
@@ -101,9 +107,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
         };
 
+        // Запускаем при загрузке
         updateCounter();
 
-        // ИСПОЛЬЗУЕМ db ВМЕСТО supabase
+        // Слушаем новые записи (счетчик обновится без перезагрузки страницы)
         db.channel('stories-channel')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'stories' }, (payload) => {
                 console.log('Новая история добавлена!');
@@ -115,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
         counterElement.textContent = "0";
     }
 
-    // --- 3. Анимации карточек ---
+    // 3. Анимации карточек
     const cards = document.querySelectorAll('.feature-card');
     cards.forEach((card, index) => {
         card.style.opacity = "0";
@@ -128,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// --- Поиск и фильтры ---
+// 4. Поиск и фильтры
 document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("hero-search");
     const filterButtons = document.querySelectorAll(".filter-btn");
