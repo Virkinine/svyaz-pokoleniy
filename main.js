@@ -2,6 +2,7 @@ const SUPABASE_URL = 'https://svyaz-pokoleniy.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_W4t0BG_nPd4DLM3SSnHViQ_b2h2Kw3m';
 
 const db = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
 async function sendData(event) {
     if (event) event.preventDefault();
 
@@ -15,7 +16,8 @@ async function sendData(event) {
         return false;
     }
 
-    if (!supabase) {
+    // ИСПОЛЬЗУЕМ db ВМЕСТО supabase
+    if (!db) {
         if (statusText) {
             statusText.className = 'status-message status-error';
             statusText.innerText = "Ошибка подключения к базе данных. Проверьте скрипты.";
@@ -30,8 +32,8 @@ async function sendData(event) {
     }
 
     try {
-        // 2. ИСПРАВЛЕНО: Добавлено is_published: true, чтобы счетчик видел новые записи
-        const { data, error } = await supabase
+        // ИСПОЛЬЗУЕМ db ВМЕСТО supabase
+        const { data, error } = await db
             .from('stories')
             .insert([{ 
                 user_name: userName, 
@@ -62,22 +64,33 @@ async function sendData(event) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    // --- 1. Привязка формы ---
+    // Находим форму по id (убедитесь, что в HTML у формы есть id="myForm")
+    const form = document.getElementById('myForm');
+    if (form) {
+        form.addEventListener('submit', sendData);
+    }
+
+    // --- 2. Счетчик ---
     const counterElement = document.getElementById("memory-counter");
     
-    if (counterElement && supabase) {
-        // Функция для обновления счетчика
+    // ИСПОЛЬЗУЕМ db ВМЕСТО supabase
+    if (counterElement && db) {
         const updateCounter = () => {
-            supabase
+            db // ИСПОЛЬЗУЕМ db ВМЕСТО supabase
                 .from('stories')
                 .select('*', { count: 'exact', head: true })
                 .eq('is_published', true)
                 .then(({ count, error }) => {
-                    if (error) { counterElement.textContent = "0"; return; }
+                    if (error) { 
+                        console.error("Ошибка счетчика:", error);
+                        counterElement.textContent = "0"; 
+                        return; 
+                    }
                     const targetValue = count || 0;
                     let currentValue = 0;
                     if (targetValue === 0) { counterElement.textContent = "0"; return; }
                     
-                    // Анимация
                     const duration = 2000;
                     const stepTime = Math.max(Math.floor(duration / targetValue), 10);
                     const counterInterval = setInterval(() => {
@@ -88,11 +101,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
         };
 
-        // Запускаем счетчик при загрузке
         updateCounter();
 
-        // 3. ДОБАВЛЕНО: Realtime - счетчик будет обновляться сам, если кто-то отправит анкету
-        supabase.channel('stories-channel')
+        // ИСПОЛЬЗУЕМ db ВМЕСТО supabase
+        db.channel('stories-channel')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'stories' }, (payload) => {
                 console.log('Новая история добавлена!');
                 updateCounter();
@@ -103,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         counterElement.textContent = "0";
     }
 
-    // --- Ваши анимации карточек остаются без изменений ---
+    // --- 3. Анимации карточек ---
     const cards = document.querySelectorAll('.feature-card');
     cards.forEach((card, index) => {
         card.style.opacity = "0";
@@ -116,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// --- Ваш поиск и фильтры остаются без изменений ---
+// --- Поиск и фильтры ---
 document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("hero-search");
     const filterButtons = document.querySelectorAll(".filter-btn");
