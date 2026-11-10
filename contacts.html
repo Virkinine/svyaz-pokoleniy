@@ -25,7 +25,8 @@
         </section>
 
         <div class="form-container">
-            <form>
+            <!-- ВАЖНО: добавлен id="myForm" -->
+            <form id="myForm">
                 <div class="form-group">
                     <label for="user-name">Ваше имя и фамилия:</label>
                     <input type="text" id="user-name" required placeholder="Иван Иванов">
@@ -41,7 +42,8 @@
                     <textarea id="hero-story" rows="8" required placeholder="Расскажите о боевом пути, наградах или жизни в тылу..."></textarea>
                 </div>
 
-                <button type="button" onclick="return sendData(event)" class="cta-button" style="border: none; cursor: pointer; width: 100%;">Отправить историю</button>
+                <!-- ВАЖНО: type="submit" и убран onclick -->
+                <button type="submit" class="cta-button" style="border: none; cursor: pointer; width: 100%;">Отправить историю</button>
             </form>
             
             <p id="formStatus"></p>
@@ -91,9 +93,7 @@
         </div>
     </footer>
 
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="main.js"></script>
 </body>
 </html>
-
-
